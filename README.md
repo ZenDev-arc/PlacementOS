@@ -1,40 +1,44 @@
 # PlacementOS
 
-AI-powered career preparation operating system for students preparing for placements, internships, interviews, and technical careers.
+> **Repository description:** PlacementOS is an AI-powered career preparation operating system that helps students manage placements, internships, interview prep, and skill growth in one unified workspace.
 
-## What Is Included
+![Next.js](https://img.shields.io/badge/Frontend-Next.js-000000?logo=next.js)
+![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?logo=fastapi)
+![Docker](https://img.shields.io/badge/Dev-Docker-2496ED?logo=docker&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-336791?logo=postgresql&logoColor=white)
 
-- `frontend/` - Next.js App Router dashboard foundation
-- `backend/` - FastAPI service with versioned REST APIs
-- `docker-compose.yml` - local Postgres, Redis, Qdrant, backend, and frontend
-- `.github/workflows/ci.yml` - starter CI for backend and frontend checks
+PlacementOS combines planning, execution, and AI guidance so students can move from **"I should prepare"** to **consistent outcomes**.
 
-## First Product Slice
+## ✨ Highlights
 
-This scaffold focuses on the first useful vertical:
+- Personalized placement-prep dashboard
+- DSA tracking with weak-topic visibility
+- Internship/application pipeline overview
+- AI mentor response contracts and scalable backend structure
 
-- preparation dashboard snapshot
-- DSA progress and weak-topic insights
-- internship/application pipeline overview
-- AI mentor response contract
-- production-shaped folders for future auth, analytics, RAG, and agents
+## 🧱 Repository Structure
 
-## Local Development
+- `frontend/` — Next.js App Router UI (dashboard + workflows)
+- `backend/` — FastAPI services with versioned APIs
+- `docker-compose.yml` — Local stack (Postgres, Redis, Qdrant, backend, frontend)
+- `.github/workflows/ci.yml` — Baseline CI checks
 
-### Backend
+## 🚀 Quick Start
+
+### 1) Backend
 
 ```bash
 cd backend
 python -m venv .venv
-.venv\Scripts\activate
+source .venv/bin/activate   # Windows (PowerShell): .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 alembic upgrade head
 uvicorn app.main:app --reload
 ```
 
-Backend API docs: `http://localhost:8000/docs`
+Backend docs: `http://localhost:8000/docs`
 
-### Frontend
+### 2) Frontend
 
 ```bash
 cd frontend
@@ -42,27 +46,27 @@ npm install
 npm run dev
 ```
 
-Frontend: `http://localhost:3000`
+Frontend app: `http://localhost:3000`
 
-### Full Stack With Docker
+### 3) Full stack with Docker
 
 ```bash
 docker compose up --build
 ```
 
-## Environment
+## 🔐 Environment Setup
 
-Copy `.env.example` files and fill real secrets when needed:
+Copy the example env files and fill real values:
 
 - `backend/.env.example`
 - `frontend/.env.example`
 
-Do not commit live API keys.
+> Never commit live credentials or API keys.
 
-## Roadmap
+## 🗺️ Product Direction
 
-1. Add real persistence with PostgreSQL models and migrations.
-2. Add authentication and protected user workspaces.
+1. Strengthen persistence with robust PostgreSQL models and migrations.
+2. Add complete authentication and protected user workspaces.
 3. Replace sample analytics with SQL-backed aggregates.
-4. Add AI provider abstraction and LangGraph supervisor workflow.
-5. Add resume parser, RAG ingestion, and interview simulator flows.
+4. Expand AI orchestration with provider abstraction and workflow supervision.
+5. Extend resume parsing, RAG ingestion, and interview simulation flows.
