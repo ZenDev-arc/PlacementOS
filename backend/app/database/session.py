@@ -2,17 +2,21 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from dotenv import load_dotenv
+from app.core.config import settings
 
-load_dotenv()
+SQLALCHEMY_DATABASE_URL = settings.database_url
 
-SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
+connect_args = {}
+if SQLALCHEMY_DATABASE_URL.startswith("sqlite"):
+    connect_args = {"check_same_thread": False}
 
-# Supabase uses Postgres, so we use the postgresql dialect
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args=connect_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
+
+def init_db():
+    Base.metadata.create_all(bind=engine)
 
 def get_db():
     db = SessionLocal()

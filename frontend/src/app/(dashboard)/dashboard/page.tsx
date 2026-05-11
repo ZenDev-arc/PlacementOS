@@ -11,6 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import { getDashboardSnapshot } from "@/services/placementos-api";
 import { useAuth } from "@clerk/clerk-react";
+import { DashboardSnapshot } from "@/lib/types";
 
 function AnimatedCounter({ value, duration = 1.5 }: { value: number; duration?: number }) {
   const [display, setDisplay] = useState(0);
@@ -71,7 +72,7 @@ export default function Dashboard() {
     if (!isLoaded || !userId) return;
     try {
       const token = await getToken();
-      const data = await getDashboardSnapshot(token || undefined);
+      const data: DashboardSnapshot = await getDashboardSnapshot(token || undefined);
       if (!data) return;
 
       setUserName(data.user || "User");
