@@ -1,0 +1,20 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+pydantic
+pydantic-settings
+python-dotenv
+python-multipart
+alembic
+httpx
+clerk-backend-sdk
+slowapi
+upstash-redis
+resend
+supabase
+huggingface_hub
+# AI
+groq
+google-generativeai
+together

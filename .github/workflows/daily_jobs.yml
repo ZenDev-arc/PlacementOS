@@ -1,0 +1,20 @@
+name: PlacementOS Daily Jobs
+
+on:
+  schedule:
+    - cron: '30 1 * * *' # 7:00 AM IST
+  workflow_dispatch:
+
+jobs:
+  run-daily-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Daily Plans
+        run: |
+          curl -X POST "${{ secrets.BACKEND_URL }}/api/v1/jobs/generate-daily-plans" \
+          -H "X-Job-Secret: ${{ secrets.JOB_SECRET }}"
+
+      - name: Send Follow-up Reminders
+        run: |
+          curl -X POST "${{ secrets.BACKEND_URL }}/api/v1/jobs/send-followup-reminders" \
+          -H "X-Job-Secret: ${{ secrets.JOB_SECRET }}"
