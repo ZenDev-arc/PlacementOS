@@ -30,7 +30,8 @@ PlacementOS combines planning, execution, and AI guidance so students can move f
 ```bash
 cd backend
 python -m venv .venv
-source .venv/bin/activate   # Windows (PowerShell): .venv\Scripts\Activate.ps1
+source .venv/bin/activate   # macOS/Linux
+# Windows (PowerShell): .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 alembic upgrade head
 uvicorn app.main:app --reload
