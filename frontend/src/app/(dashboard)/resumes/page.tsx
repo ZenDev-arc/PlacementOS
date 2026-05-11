@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/clerk-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   FileText, Upload, Sparkles, Search, Trash2, Download, 

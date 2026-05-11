@@ -1,10 +1,27 @@
+"use client";
+ 
+import { useEffect, useState } from "react";
+import { useAuth } from "@clerk/clerk-react";
 import { AppSidebar } from "@/components/app-sidebar";
 import { InternshipsWorkspace } from "@/components/internships/internships-workspace";
 import { getInternshipApplications } from "@/services/placementos-api";
-
-export default async function InternshipsPage() {
-  const applications = await getInternshipApplications();
-
+import { InternshipApplication } from "@/lib/types";
+ 
+export default function InternshipsPage() {
+  const [applications, setApplications] = useState<InternshipApplication[]>([]);
+  const { isLoaded, userId, getToken } = useAuth();
+ 
+  useEffect(() => {
+    async function load() {
+      if (isLoaded && userId) {
+        const token = await getToken();
+        const data = await getInternshipApplications(token || undefined);
+        setApplications(data);
+      }
+    }
+    load();
+  }, [isLoaded, userId, getToken]);
+ 
   return (
     <div className="page-shell">
       <AppSidebar active="internships" />

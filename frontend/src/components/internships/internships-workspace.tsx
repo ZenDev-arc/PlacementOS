@@ -10,14 +10,14 @@ type InternshipsWorkspaceProps = {
   initialApplications: InternshipApplication[];
 };
 
-const statuses: ApplicationStatus[] = ["applied", "screening", "interviewing", "offer", "rejected"];
-const visiblePipeline: ApplicationStatus[] = ["applied", "screening", "interviewing", "offer"];
+const statuses: ApplicationStatus[] = ["Identified", "Applied", "OA", "Interview", "Offer", "Rejected", "Ghosted"];
+const visiblePipeline: ApplicationStatus[] = ["Applied", "OA", "Interview", "Offer"];
 
 export function InternshipsWorkspace({ initialApplications }: InternshipsWorkspaceProps) {
   const [applications, setApplications] = useState(initialApplications);
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
-  const [status, setStatus] = useState<ApplicationStatus>("applied");
+  const [status, setStatus] = useState<ApplicationStatus>("Applied");
   const [source, setSource] = useState("LinkedIn");
   const [appliedOn, setAppliedOn] = useState(new Date().toISOString().slice(0, 10));
   const [notes, setNotes] = useState("");
@@ -34,10 +34,10 @@ export function InternshipsWorkspace({ initialApplications }: InternshipsWorkspa
   );
 
   const activeCount = applications.filter((application) =>
-    ["applied", "screening", "interviewing"].includes(application.status),
+    ["Applied", "OA", "Interview"].includes(application.status),
   ).length;
-  const interviewCount = applications.filter((application) => application.status === "interviewing").length;
-  const offerCount = applications.filter((application) => application.status === "offer").length;
+  const interviewCount = applications.filter((application) => application.status === "Interview").length;
+  const offerCount = applications.filter((application) => application.status === "Offer").length;
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -51,18 +51,18 @@ export function InternshipsWorkspace({ initialApplications }: InternshipsWorkspa
     setIsSubmitting(true);
     try {
       const application = await createInternshipApplication({
-        company: company.trim(),
-        role: role.trim(),
+        company_name: company.trim(),
+        role_title: role.trim(),
         status,
-        source: source.trim() || "Manual",
-        applied_on: appliedOn || null,
+        platform: source.trim() || "Manual",
+        date_applied: appliedOn || null,
         notes,
       });
       setApplications((current) => [application, ...current]);
       setCompany("");
       setRole("");
       setNotes("");
-      setStatus("applied");
+      setStatus("Applied");
     } catch {
       setError("Could not add the application. Make sure the backend is running.");
     } finally {
@@ -163,9 +163,9 @@ export function InternshipsWorkspace({ initialApplications }: InternshipsWorkspa
             {applications.map((application) => (
               <div className="application-row" key={application.id}>
                 <div>
-                  <div className="focus-title">{application.company}</div>
+                  <div className="focus-title">{application.company_name}</div>
                   <div className="focus-meta">
-                    {application.role} | {application.source} | {application.applied_on ?? "Not dated"}
+                    {application.role_title} | {application.platform} | {application.date_applied ?? "Not dated"}
                   </div>
                 </div>
                 <span className={`application-status ${application.status}`}>{application.status}</span>

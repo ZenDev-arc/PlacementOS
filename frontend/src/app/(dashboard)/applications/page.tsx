@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Building2, Clock, Zap, X, ChevronRight, Search, ExternalLink, AlertCircle, CheckCircle2, Briefcase, TrendingUp, Target, ArrowRight, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getInternshipApplications, createInternshipApplication, updateInternshipApplication, deleteInternshipApplication } from "@/services/placementos-api";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/clerk-react";
 
 const STAGES = ["Identified","Applied","OA","Interview","Offer","Rejected"];
 const STAGE_META: Record<string, { color: string; bg: string; border: string }> = {

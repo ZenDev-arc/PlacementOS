@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from api.v1.endpoints import auth, dashboard, dsa, onboarding, ai, applications, resumes, jobs, admin, subjects, habits
+from api.v1.endpoints import auth, dashboard, dsa, onboarding, ai, applications, resumes, jobs, admin, subjects, habits, notifications
 
 api_router = APIRouter()
 
@@ -14,5 +14,6 @@ api_router.include_router(jobs.router, prefix="/jobs", tags=["jobs"])
 api_router.include_router(admin.router, prefix="/admin", tags=["admin"])
 api_router.include_router(subjects.router, prefix="/subjects", tags=["subjects"])
 api_router.include_router(habits.router, prefix="/habits", tags=["habits"])
+api_router.include_router(notifications.router, prefix="/notifications", tags=["notifications"])
 # Add other routers here as they are built...
 

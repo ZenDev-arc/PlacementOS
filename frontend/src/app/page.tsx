@@ -20,7 +20,7 @@ import {
   Layers
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useAuth, SignInButton } from "@clerk/nextjs";
+import { useAuth, SignInButton } from "@clerk/clerk-react";
 
 const containerVariants = {
   hidden: { opacity: 0 },

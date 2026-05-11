@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getHabits, createHabit, toggleHabit, deleteHabit } from "@/services/placementos-api";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/clerk-react";
 
 const PRESET_ICONS = [
   { icon: Zap,      label: "Energy" },

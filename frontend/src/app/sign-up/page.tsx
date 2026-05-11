@@ -1,10 +1,11 @@
-import { SignIn } from "@clerk/nextjs";
+"use client";
+
+import { SignUp } from "@clerk/clerk-react";
 import { dark } from "@clerk/themes";
 
-export default function Page() {
+export default function SignUpPage() {
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6 relative overflow-hidden selection:bg-indigo-500/30">
-      {/* Background Particle Field */}
       <div className="absolute inset-0 -z-10 opacity-30">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] animate-pulse" />
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-[120px] animate-pulse [animation-delay:2s]" />
@@ -18,7 +19,7 @@ export default function Page() {
           <span className="font-black text-2xl tracking-tight text-white">Placement<span className="text-indigo-400">OS</span></span>
         </div>
 
-        <SignIn 
+        <SignUp 
           appearance={{
             baseTheme: dark
           }}

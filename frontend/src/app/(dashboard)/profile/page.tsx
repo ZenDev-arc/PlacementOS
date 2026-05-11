@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/clerk-react";
 import { motion } from "framer-motion";
 import {
   User, Mail, Code2, Target, Clock, Calendar,

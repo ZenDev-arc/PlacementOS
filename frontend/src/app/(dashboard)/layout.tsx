@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useAuth } from "@clerk/clerk-react";
+import { useNotifications } from "@/hooks/use-notifications";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function DashboardLayout({
@@ -8,6 +10,8 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { isLoaded, userId } = useAuth();
+  useNotifications();
   const router = useRouter();
   const pathname = usePathname();
   const [loading, setLoading] = useState(true);

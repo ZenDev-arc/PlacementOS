@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/clerk-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Send, Bot, User as UserIcon, Sparkles, RotateCcw,

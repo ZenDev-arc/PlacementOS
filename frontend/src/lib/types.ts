@@ -15,14 +15,26 @@ export type FocusItem = {
 };
 
 export type DashboardSnapshot = {
-  user_name: string;
+  user: string;
   readiness_score: number;
-  streak_days: number;
-  study_hours_week: number;
-  metrics: MetricCard[];
-  focus_queue: FocusItem[];
-  weak_topics: string[];
-  application_pipeline: Record<string, number>;
+  today_plan: any;
+  activity_chart: number[];
+  stats: {
+    dsa_solved: number;
+    streak: number;
+    ai_hours: number;
+    github_repos: number;
+  };
+  recent_logs: {
+    time: string;
+    msg: string;
+    type: string;
+  }[];
+  pulse_metrics: {
+    id: string;
+    label: string;
+    value: number;
+  }[];
 };
 
 export type TopicProgress = {

@@ -26,7 +26,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getDsaProblems, createDsaProblem, getDsaStats } from "@/services/placementos-api";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/clerk-react";
 
 const TOPICS = ["Arrays", "Strings", "Trees", "Graphs", "DP", "Greedy", "Linked List", "Stack", "Queue", "Math"];
 

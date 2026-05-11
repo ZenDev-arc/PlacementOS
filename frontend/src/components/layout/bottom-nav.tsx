@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton } from "@clerk/clerk-react";
 import { LayoutDashboard, Code2, BookOpen, Layers, Briefcase, Sparkles, User, FileText, Target, Timer, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -72,7 +72,7 @@ export function FloatingBottomNav() {
 
       <div className="flex items-center justify-center nav-item nav-item-inactive overflow-hidden">
         <UserButton 
-          afterSignOutUrl="/"
+
           appearance={{
             elements: {
               userButtonAvatarBox: "w-6 h-6 rounded-lg",

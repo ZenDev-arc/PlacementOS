@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { ClerkProvider } from '@clerk/nextjs';
-import { dark } from '@clerk/themes';
+import { Providers } from "@/components/providers";
 import "./globals.css";
 import { FloatingBottomNav } from "@/components/layout/bottom-nav";
 
@@ -28,11 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark
-      }}
-    >
+    <Providers>
       <html lang="en">
         <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>
           <main className="relative min-h-screen">
@@ -41,6 +36,6 @@ export default function RootLayout({
           </main>
         </body>
       </html>
-    </ClerkProvider>
+    </Providers>
   );
 }

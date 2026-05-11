@@ -338,7 +338,7 @@ export default function ProjectsPage() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  {[["Magnitude", selected.stargazers_count, Star], ["Forks", selected.fork_count, GitFork], ["Observers", selected.watchers_count, Eye], ["Anomalies", selected.open_issues_count, AlertCircle]].map(([l, v, Icon]: any) => (
+                  {[["Magnitude", selected.stargazers_count, Star], ["Forks", selected.forks_count, GitFork], ["Observers", selected.watchers_count, Eye], ["Anomalies", selected.open_issues_count, AlertCircle]].map(([l, v, Icon]: any) => (
                     <div key={l} className="vibe-card !p-6 flex items-center gap-4 bg-[#08100e]">
                       <div className="w-10 h-10 rounded-xl bg-white/[0.02] flex items-center justify-center">
                          <Icon className="w-4 h-4 text-emerald-500/40" />

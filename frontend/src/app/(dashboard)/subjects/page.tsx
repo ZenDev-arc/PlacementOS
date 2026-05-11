@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getSubjects, createSubject, updateSubject, deleteSubject } from "@/services/placementos-api";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/clerk-react";
 
 const PLACEMENT_CURRICULUM: Record<string, { title: string; questions: number }[]> = {
   "operating systems": [

@@ -10,6 +10,8 @@ import type {
   TaskCreate,
 } from "@/lib/types";
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api/backend";
+
 const dashboardFallback: any = null;
 
 const dsaFallback: any = null;
@@ -85,7 +87,7 @@ export async function submitOnboarding(payload: any, explicitToken?: string) {
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const response = await fetch("/api/backend/onboarding", {
+  const response = await fetch(`${BASE_URL}/onboarding`, {
     method: "POST",
     headers,
     body: JSON.stringify(payload),
@@ -105,7 +107,7 @@ async function apiGet<T>(path: string, fallback: T, explicitToken?: string): Pro
     const headers: Record<string, string> = {};
     if (token) headers["Authorization"] = `Bearer ${token}`;
 
-    const response = await fetch(`/api/backend${path}`, { 
+    const response = await fetch(`${BASE_URL}${path}`, { 
       headers,
       next: { revalidate: 30 } 
     });
@@ -137,7 +139,7 @@ export async function createDsaProblem(payload: DsaProblemCreate, explicitToken?
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const response = await fetch("/api/backend/dsa/log", {
+  const response = await fetch(`${BASE_URL}/dsa/log`, {
     method: "POST",
     headers,
     body: JSON.stringify(payload),
@@ -155,7 +157,7 @@ export async function createTask(payload: TaskCreate, explicitToken?: string): P
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const response = await fetch("/api/backend/tasks", {
+  const response = await fetch(`${BASE_URL}/tasks`, {
     method: "POST",
     headers,
     body: JSON.stringify({ status: "todo", ...payload }),
@@ -176,7 +178,7 @@ export async function createInternshipApplication(
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const response = await fetch("/api/backend/applications", {
+  const response = await fetch(`${BASE_URL}/applications`, {
     method: "POST",
     headers,
     body: JSON.stringify(payload),
@@ -198,7 +200,7 @@ export async function updateInternshipApplication(
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const response = await fetch(`/api/backend/applications/${id}`, {
+  const response = await fetch(`${BASE_URL}/applications/${id}`, {
     method: "PATCH",
     headers,
     body: JSON.stringify(payload),
@@ -212,7 +214,7 @@ export async function deleteInternshipApplication(id: string, explicitToken?: st
   const headers: Record<string, string> = {};
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const response = await fetch(`/api/backend/applications/${id}`, {
+  const response = await fetch(`${BASE_URL}/applications/${id}`, {
     method: "DELETE",
     headers,
   });
@@ -238,7 +240,7 @@ export async function deleteAiSession(id: string, explicitToken?: string) {
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
   try {
-    const response = await fetch(`/api/backend/ai/sessions/${id}`, {
+    const response = await fetch(`${BASE_URL}/ai/sessions/${id}`, {
       method: "DELETE",
       headers,
     });
@@ -263,7 +265,7 @@ export async function createSubject(data: any, explicitToken?: string) {
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const response = await fetch("/api/backend/subjects", {
+  const response = await fetch(`${BASE_URL}/subjects`, {
     method: "POST",
     headers,
     body: JSON.stringify(data),
@@ -281,7 +283,7 @@ export async function updateSubject(id: string, data: any, explicitToken?: strin
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const response = await fetch(`/api/backend/subjects/${id}`, {
+  const response = await fetch(`${BASE_URL}/subjects/${id}`, {
     method: "PATCH",
     headers,
     body: JSON.stringify(data),
@@ -307,7 +309,7 @@ export async function askMentor(question: string, explicitToken?: string): Promi
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const response = await fetch("/api/backend/ai/chat", {
+  const response = await fetch(`${BASE_URL}/ai/chat`, {
     method: "POST",
     headers,
     body: JSON.stringify({ message: question }),
@@ -326,7 +328,7 @@ export async function createHabit(data: any, explicitToken?: string) {
   const headers: Record<string, string> = { "Content-Type": "application/json" };
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const response = await fetch("/api/backend/habits/", {
+  const response = await fetch(`${BASE_URL}/habits/`, {
     method: "POST",
     headers,
     body: JSON.stringify(data),
@@ -340,7 +342,7 @@ export async function toggleHabit(habitId: string, date?: string, explicitToken?
   const headers: Record<string, string> = {};
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const url = `/api/backend/habits/${habitId}/toggle${date ? `?date_str=${date}` : ""}`;
+  const url = `${BASE_URL}/habits/${habitId}/toggle${date ? `?date_str=${date}` : ""}`;
   const response = await fetch(url, {
     method: "POST",
     headers,
@@ -354,10 +356,23 @@ export async function deleteHabit(habitId: string, explicitToken?: string) {
   const headers: Record<string, string> = {};
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const response = await fetch(`/api/backend/habits/${habitId}/`, {
+  const response = await fetch(`${BASE_URL}/habits/${habitId}/`, {
     method: "DELETE",
     headers,
   });
   if (!response.ok) throw new Error("Habit deletion failed");
+  return response.json();
+}
+export async function registerDeviceToken(token: string, platform: string = "web"): Promise<any> {
+  const authToken = await getToken();
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (authToken) headers["Authorization"] = `Bearer ${authToken}`;
+
+  const response = await fetch(`${BASE_URL}/notifications/register-device`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ token, platform }),
+  });
+  if (!response.ok) throw new Error("Device registration failed");
   return response.json();
 }

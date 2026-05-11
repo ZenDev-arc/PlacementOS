@@ -47,3 +47,16 @@ class OnboardingProfile(Base):
 
     user = relationship("User", back_populates="profile")
 
+
+class DeviceToken(Base):
+    __tablename__ = "device_tokens"
+
+    id = Column(GUID(), primary_key=True, default=uuid.uuid4)
+    user_id = Column(GUID(), ForeignKey("users.id"), nullable=False)
+    token = Column(String, unique=True, index=True, nullable=False)
+    platform = Column(String) # 'ios', 'android', 'web'
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    last_updated = Column(DateTime(timezone=True), onupdate=func.now())
+
+    user = relationship("User")
+

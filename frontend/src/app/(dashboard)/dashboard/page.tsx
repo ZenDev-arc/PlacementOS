@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getDashboardSnapshot } from "@/services/placementos-api";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/clerk-react";
 
 function AnimatedCounter({ value, duration = 1.5 }: { value: number; duration?: number }) {
   const [display, setDisplay] = useState(0);
@@ -55,8 +55,8 @@ export default function Dashboard() {
   const [activityPoints, setActivityPoints] = useState<{x: number, y: number}[]>([]);
   const [isScanning, setIsScanning] = useState(false);
   const [time, setTime] = useState(new Date());
-  const [tasks, setTasks] = useState([]);
-  const [logs, setLogs] = useState([]);
+  const [tasks, setTasks] = useState<any[]>([]);
+  const [logs, setLogs] = useState<any[]>([]);
   const [pulseMetrics, setPulseMetrics] = useState(PULSE_METRICS);
   const [activeMetric, setActiveMetric] = useState(PULSE_METRICS[0]);
 

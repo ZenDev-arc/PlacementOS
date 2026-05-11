@@ -6,3 +6,4 @@ from models.resume import ResumeVersion
 from models.roadmap import RoadmapPhase, DailyPlan
 from models.subject import Subject
 from models.habit import Habit, HabitLog
+from models.notification import Reminder, NotificationLog

@@ -17,7 +17,7 @@ import {
   Search
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/clerk-react";
 import { submitOnboarding } from "@/services/placementos-api";
 
 const steps = [
