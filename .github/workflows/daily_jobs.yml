@@ -10,11 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Generate Daily Plans
+        env:
+          BACKEND_URL: ${{ secrets.BACKEND_URL || vars.BACKEND_URL }}
+          JOB_SECRET: ${{ secrets.JOB_SECRET }}
         run: |
-          curl -X POST "${{ secrets.BACKEND_URL }}/api/v1/jobs/generate-daily-plans" \
-          -H "X-Job-Secret: ${{ secrets.JOB_SECRET }}"
+          if [ -z "$BACKEND_URL" ]; then
+            echo "::error::BACKEND_URL is not set. Please add it to GitHub Secrets or Variables."
+            exit 1
+          fi
+          # Ensure URL doesn't have trailing slash for consistency
+          URL=$(echo $BACKEND_URL | sed 's:/*$::')
+          curl -X POST "$URL/api/v1/jobs/generate-daily-plans" \
+          -H "X-Job-Secret: $JOB_SECRET"
 
       - name: Send Follow-up Reminders
+        env:
+          BACKEND_URL: ${{ secrets.BACKEND_URL || vars.BACKEND_URL }}
+          JOB_SECRET: ${{ secrets.JOB_SECRET }}
         run: |
-          curl -X POST "${{ secrets.BACKEND_URL }}/api/v1/jobs/send-followup-reminders" \
-          -H "X-Job-Secret: ${{ secrets.JOB_SECRET }}"
+          if [ -z "$BACKEND_URL" ]; then
+            echo "::error::BACKEND_URL is not set."
+            exit 1
+          fi
+          URL=$(echo $BACKEND_URL | sed 's:/*$::')
+          curl -X POST "$URL/api/v1/jobs/send-followup-reminders" \
+          -H "X-Job-Secret: $JOB_SECRET"
